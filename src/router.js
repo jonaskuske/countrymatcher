@@ -1,21 +1,34 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import About from "./views/About.vue";
+import Splash from "./views/Splash.vue";
+import Tutorial from "./views/Tutorial.vue";
+import Selection from "./views/Selection.vue";
+import Results from "./views/Results.vue";
 
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "splash",
+      component: Splash
     },
     {
-      path: "/about",
-      name: "about",
-      component: About
+      path: "/tutorial",
+      name: "tutorial",
+      component: Tutorial
+    },
+    {
+      path: "/selection",
+      name: "selection",
+      component: Selection
+    },
+    {
+      path: "/results",
+      name: "results",
+      component: Results
     }
   ]
 });
