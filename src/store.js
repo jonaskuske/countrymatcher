@@ -6,22 +6,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     userSelection: {
-      housing: undefined,
-      income: undefined,
-      jobs: undefined,
-      education: undefined,
-      safety: undefined,
-      worklifebalance: undefined
     },
     result: "",
-    otherResults: []
+    otherResults: [],
+    overlayOpen: false
   },
   mutations: {
-    acceptSelection: (state, value) => (state.userSelection[value] = 1),
-    dismissSelection: (state, value) => (state.userSelection[value] = 0),
-    resetSelection: (state, value) => (state.userSelection[value] = undefined),
+    updateUserSelectionOptions: (state, value) => (state.userSelection = value),
+    acceptSelection: (state, value) => (state.userSelection[value].selection = 1),
+    dismissSelection: (state, value) => (state.userSelection[value].selection = 0),
+    resetSelection: (state, value) => (state.userSelection[value].selection = undefined),
     setResult: (state, result) => (state.result = result),
-    setOtherResults: (state, results) => (state.otherResults = results)
+    setOtherResults: (state, results) => (state.otherResults = results),
+    toggleOverlay: state => (state.overlayOpen = !state.overlayOpen)
   },
   actions: {
     resetUserSelection({ state, commit }) {
@@ -36,16 +33,18 @@ export default new Vuex.Store({
 
       const body = Object
         .entries(state.userSelection)
-        .map(([key, val]) => `${key}=${val}`)
+        .map(([key, val]) => `${val.title}=${val.selection}`)
         .join("&");
 
       const response = await fetch('http://countrymatcher.jonaskuske.com/getter.php', {
-        body,
         method: 'post',
+        body: body,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
-
-      const [result, ...otherResults] = await response.json();
+      const json = await response.json();
+      const [result, ...otherResults] = json.Country
+        ? [json.Country]
+        : json;
       commit("setResult", result);
       commit("setOtherResults", otherResults);
     }
@@ -54,7 +53,7 @@ export default new Vuex.Store({
     unselectedCategories(state) {
       return Object
         .entries(state.userSelection)
-        .filter(([key, val]) => val === undefined)
+        .filter(([key, val]) => val.selection === undefined)
         .map(([val]) => val);
     }
   }

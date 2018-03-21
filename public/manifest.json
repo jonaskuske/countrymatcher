@@ -3,12 +3,12 @@
   "short_name": "countrymatcher",
   "icons": [
     {
-      "src": "/img/icons/icon.png",
+      "src": "/img/icons/app-icon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/img/icons/icon@2x.png",
+      "src": "/img/icons/app-icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }

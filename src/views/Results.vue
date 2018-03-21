@@ -1,19 +1,27 @@
 <template>
   <div class="view results">
-    <h1>Your Dreamcountry is...</h1>
+    <h1>Your Dreamcountry could be...</h1>
     <p class="top-result">{{ result }}</p>
     <section>
       <h3 v-if="otherResults.length">Weitere</h3>
       <p v-for="(other, i) in otherResults">{{ other }}</p>
     </section>
-    <button @click="reset">Zurück zum Start</button>
+    <main-button @click.native="reset">Zurück zum Start</main-button>
   </div>
 </template>
 
 <script>
+  import MainButton from "@/components/MainButton.vue";
   import { mapState, mapActions } from "vuex";
 
   export default {
+    components: {
+      MainButton
+    },
+    mounted() {
+      this.$confetti.start();
+      setTimeout(() => this.$confetti.stop(), 500);
+    },
     computed: {
       ...mapState(["result", "otherResults"])
     },
@@ -29,7 +37,7 @@
 
 <style scoped>
   .results {
-    background: linear-gradient(to right bottom, #011863, #0030cc);
+    background: linear-gradient(to bottom, #0030df, #002098);
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -43,12 +51,9 @@
     margin: 6rem 0 2rem 0;
   }
   button {
-    color: blue;
-    background: #fff;
-    border: none;
-    outline: none;
     height: 2rem;
     padding: 0.5rem;
+    font-weight: normal;
   }
   .top-result {
     font-weight: 600;
@@ -57,5 +62,9 @@
   p {
     margin: 0;
     padding: 0;
+  }
+  h1 {
+    font-size: 27px;
+    font-weight: normal;
   }
 </style>
