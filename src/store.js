@@ -5,8 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    userSelection: {
-    },
+    userSelection: {},
     result: "",
     otherResults: [],
     overlayOpen: false
@@ -41,10 +40,10 @@ export default new Vuex.Store({
         body: body,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
-      const json = await response.json();
-      const [result, ...otherResults] = json.Country
-        ? [json.Country]
-        : json;
+      const raw = await response.json();
+      const [result, ...otherResults] = raw.Country
+        ? [raw.Country]
+        : raw;
       commit("setResult", result);
       commit("setOtherResults", otherResults);
     }
@@ -54,7 +53,7 @@ export default new Vuex.Store({
       return Object
         .entries(state.userSelection)
         .filter(([key, val]) => val.selection === undefined)
-        .map(([val]) => val);
+        .map(([key]) => key);
     }
   }
 });

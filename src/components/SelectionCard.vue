@@ -1,19 +1,22 @@
 <template>
-<div class="sel-container">
-  <div
-    class="sel-card"
-    :class="[{'sel-card-fade': animate.do}, {'sel-card-fade-left': animate.do && animate.dir === 'left'}, {'sel-card-fade-right': animate.do&&animate.dir==='right'}]"
-    :style="`background-image: url(${image})`"
-  >
-    <p>{{title | capitalize }}</p>
-    <ul>
-      <li v-for="(bulletpoint, i) in bulletpoints" :key="i">
-        * {{ bulletpoint }} *
-      </li>
-    </ul>
+  <div class="sel-container">
+    <div
+      :class="[
+        'sel-card',
+        {'sel-card-fade': animate.do},
+        {'sel-card-fade-left': animate.do && animate.dir === 'left'},
+        {'sel-card-fade-right': animate.do && animate.dir === 'right'}
+      ]"
+      :style="`background-image: url(${image})`"
+    >
+      <p>{{title | capitalize }}</p>
+      <ul>
+        <li v-for="(bulletpoint, i) in bulletpoints" :key="i">
+          * {{ bulletpoint }} *
+        </li>
+      </ul>
+    </div>
   </div>
-
-</div>
 </template>
 
 <script>

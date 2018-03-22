@@ -10,15 +10,12 @@
   import FullscreenOverlay from "./views/Overlay.vue";
 
   export default {
-    components: {
-      FullscreenOverlay
-    },
+    components: { FullscreenOverlay },
     computed: {
       ...mapState(["overlayOpen"])
     }
   };
 </script>
-
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400");
@@ -34,6 +31,9 @@
     min-height: 100%;
     color: #fff;
     text-align: center;
+  }
+  body {
+    position: relative;
   }
   html,
   button {

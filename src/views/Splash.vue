@@ -1,22 +1,20 @@
 <template>
-<div class="view splash">
-  <img src="@/assets/logo-countrymatcher3.svg" alt="EU Flagge">
-  <div class="splash-textarea">
-    <h1>Find out where you belong.</h1>
-    <p>Tell us what is hot and what is not...
-    <br>and we will find your match!</p>
+  <div class="view splash">
+    <img src="@/assets/logo-countrymatcher.svg" alt="EU Flagge">
+    <div class="splash-textarea">
+      <h1>Find out where you belong.</h1>
+      <p>Tell us what is hot and what is not...
+      <br>and we will find your match!</p>
+    </div>
+      <main-button class="btn" @click.native="next">Find my Country!</main-button>
   </div>
-    <main-button class="btn" @click.native="next">Find my Country!</main-button>
-</div>
 </template>
 
 <script>
   import MainButton from "@/components/MainButton.vue";
 
   export default {
-    components: {
-      MainButton
-    },
+    components: { MainButton },
     methods: {
       next() {
         this.$router.push("/tutorial");

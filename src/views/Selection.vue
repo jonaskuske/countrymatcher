@@ -2,21 +2,22 @@
   <div class="view selection">
     <template v-if="unselectedCategories.length">
       <header>
-        <button @click="openOverlay">?</button>
+        <button @click="$router.push('/tutorial')" class="btn-back"></button>
+        <button @click="openOverlay" class="btn-help">?</button>
         <p>{{ currentCategoryNumber }} / {{ numberOfCategories }}</p>
       </header>
-    <selection-card
-      v-touch:swipe.left="dismiss"
-      v-touch:swipe.right="accept"
-      :title="currentCategory"
-      :image="currentImage ? currentImage : testImg"
-      :bulletpoints="currentBulletpoints"
-      :animate="{do: animateCard, dir: animateDir}"
-    />
-    <div class="btn-container">
-      <button class="btn-react btn-dismiss" @click="dismiss" />
-      <button class="btn-react btn-accept" @click="accept" />
-    </div>
+      <selection-card
+        v-touch:swipe.left="dismiss"
+        v-touch:swipe.right="accept"
+        :title="currentCategory"
+        :image="currentImage ? currentImage : testImg"
+        :bulletpoints="currentBulletpoints"
+        :animate="{do: animateCard, dir: animateDir}"
+      />
+      <div class="btn-container">
+        <button class="btn-react btn-dismiss" @click="dismiss" />
+        <button class="btn-react btn-accept" @click="accept" />
+      </div>
     </template>
     <p v-else>Loading...</p>
   </div>
@@ -28,9 +29,7 @@
   import { mapActions, mapGetters, mapState } from "vuex";
 
   export default {
-    components: {
-      SelectionCard
-    },
+    components: { SelectionCard },
     data() {
       return { testImg, animateCard: false, animateDir: "left" };
     },
@@ -51,11 +50,11 @@
           .split("\r\n")
           .filter(([val]) => !!val);
       },
-      currentCategoryNumber() {
-        return this.numberOfCategories - this.unselectedCategories.length + 1;
-      },
       numberOfCategories() {
         return Object.values(this.userSelection).length;
+      },
+      currentCategoryNumber() {
+        return this.numberOfCategories - this.unselectedCategories.length + 1;
       }
     },
     methods: {
@@ -72,12 +71,8 @@
       select({ type }) {
         this.animateCard = true;
         this.animateDir = type === "dismiss" ? "left" : "right";
-
         setTimeout(() => {
-          this.selectCategory({
-            type,
-            category: this.currentCategory
-          });
+          this.selectCategory({ type, category: this.currentCategory });
           this.animateCard = false;
           if (this.unselectedCategories.length === 0) this.getResults();
         }, 300);
@@ -107,12 +102,21 @@
   header > button {
     width: 25px;
     height: 25px;
-    margin: 10px 10px 0 0;
-    justify-self: flex-end;
+    margin: 10px;
+    margin-top: 20px;
     color: #fff;
     background: none;
-    border: 1px solid #fff;
-    border-radius: 50%;
+    border: none;
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .btn-help {
+    background: url(~@/assets/icn-info.svg) center / contain no-repeat;
+    justify-self: flex-end;
+  }
+  .btn-back {
+    background: url(~@/assets/icn-back.svg) center / contain no-repeat;
+    justify-self: flex-start;
   }
   header > p {
     height: 50px;

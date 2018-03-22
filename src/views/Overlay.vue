@@ -1,9 +1,8 @@
 <template>
   <div class="overlay">
     <h1>Find out where you belong.</h1>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-    <main-button class="mb-btn" @click.native="$store.commit('toggleOverlay')">Got it!</main-button>
+    <p>Tell us if something is hot or not by swiping left and right - once you're done we'll tell you which European countries are perfect for you.</p>
+    <main-button class="overlay-btn" @click.native="$store.commit('toggleOverlay')">Got it!</main-button>
   </div>
 </template>
 
@@ -11,9 +10,7 @@
   import MainButton from "@/components/MainButton.vue";
 
   export default {
-    components: {
-      MainButton
-    }
+    components: { MainButton }
   };
 </script>
 
@@ -21,11 +18,15 @@
 <style>
   .overlay {
     position: absolute;
-    height: 100%;
-    width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.8);
     text-align: left;
     padding-top: 2rem;
+    display: grid;
+    justify-content: center;
   }
   .overlay p,
   .overlay h1 {
@@ -41,8 +42,8 @@
     font-size: 22px;
     font-weight: normal;
   }
-  .mb-btn {
-    transform: translateX(-50%);
-    margin-left: 50%;
+  .overlay-btn {
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

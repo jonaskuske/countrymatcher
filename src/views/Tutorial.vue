@@ -10,9 +10,7 @@
   import MainButton from "@/components/MainButton.vue";
 
   export default {
-    components: {
-      MainButton
-    },
+    components: { MainButton },
     methods: {
       next() {
         this.$router.push("/selection");
