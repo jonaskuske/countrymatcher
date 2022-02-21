@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.9daca273af0dcd53744729ad02aa90ff.js"
+  "/countrymatcher/precache-manifest.1b0bc0d627b46be2c5059e7222c25d43.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "countrymatcher"});
